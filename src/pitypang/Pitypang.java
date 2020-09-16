@@ -8,7 +8,9 @@ package pitypang;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,11 +48,12 @@ public class Pitypang {
                 darabolt[5][i]= Integer.parseInt(ideiglenes[5]);
                 nevek[i]= ideiglenes[6];
             }
-            
+            //szerintem ez fontos:
+            okos.close();
             System.out.println("---MÁSODIK FELADAT---");
             Integer maxEjszakak=+0;
             Integer sorszam=0;
-            for (int i = 0; i < darabolt.length; i++) {
+            for (int i = 0; i < 984; i++) {
                 if ((darabolt[3][i]-darabolt[2][i])>maxEjszakak) {
                     maxEjszakak=(darabolt[3][i]-darabolt[2][i]);
                     sorszam=darabolt[0][i];
@@ -59,8 +62,50 @@ public class Pitypang {
             System.out.println(nevek[sorszam-1]+" ("+darabolt[2][sorszam-1]+") - "+maxEjszakak);
             
             System.out.println("---HARMADIK FELADAT---");
+            FileWriter butaIro= new FileWriter("bevetel.txt");
+            PrintWriter okosIro= new PrintWriter(butaIro);
+            Integer osszeg;
+            Integer ejszakaszam= 0;
+            Integer szemelyek= 0;
+            //darabolt.length=6 hogy lehet másképp megadni?
+            for (int i = 0; i < 984; i++) {
+                
+                osszeg=0;
+                ejszakaszam=(darabolt[3][i]-darabolt[2][i]);
+                szemelyek=darabolt[4][i];
+                
+                if (darabolt[2][i]<121) {
+                    osszeg=ejszakaszam*9000;
+                    if (darabolt[4][i]>2) {
+                        osszeg=osszeg+(2000*ejszakaszam);
+                    }
+                    if (darabolt[5][i]==1) {
+                        osszeg=osszeg+(szemelyek*ejszakaszam*1100);
+                    }
+                }
+                if (darabolt[2][i]>=121) {
+                    osszeg=ejszakaszam*10000;
+                    if (darabolt[4][i]>2) {
+                        osszeg=osszeg+(2000*ejszakaszam);
+                    }
+                    if (darabolt[5][i]==1) {
+                        osszeg=osszeg+(szemelyek*ejszakaszam*1100);
+                    }
+                }
+                if (darabolt[2][i]>=244) {
+                    osszeg=ejszakaszam*8000;
+                    if (darabolt[4][i]>2) {
+                        osszeg=osszeg+(2000*ejszakaszam);
+                    }
+                    if (darabolt[5][i]==1) {
+                        osszeg=osszeg+(szemelyek*ejszakaszam*1100);
+                    }
+                }
+                okosIro.println(darabolt[0][i]+":"+osszeg);
+            }
+            okosIro.close();
             
-             
+            System.out.println("---NEGYEDIK FELADAT---");
             
         } catch (FileNotFoundException ex) {
             System.out.println("Hiba a file-nál!");
