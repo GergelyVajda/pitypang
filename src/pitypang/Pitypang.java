@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -125,65 +126,93 @@ public class Pitypang {
 
             for (int i = 0; i < 984; i++) {
                 ejszakaszam = (darabolt[3][i] - darabolt[2][i]);
-                szemelyek= darabolt[4][i];
+                szemelyek = darabolt[4][i];
                 for (int j = 0; j < ejszakaszam; j++) {
                     if (darabolt[3][i] - ejszakaszam <= 31) {
-                        jan=jan+szemelyek;
+                        jan = jan + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 32 && darabolt[3][i] - ejszakaszam <= 59) {
-                        feb=feb+szemelyek;
+                        feb = feb + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 60 && darabolt[3][i] - ejszakaszam <= 90) {
-                        mar=mar+szemelyek;
+                        mar = mar + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 91 && darabolt[3][i] - ejszakaszam <= 120) {
-                        apr=apr+szemelyek;
+                        apr = apr + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 121 && darabolt[3][i] - ejszakaszam <= 151) {
-                        maj=maj+szemelyek;
+                        maj = maj + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 152 && darabolt[3][i] - ejszakaszam <= 181) {
-                        jun=jun+szemelyek;
+                        jun = jun + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 182 && darabolt[3][i] - ejszakaszam <= 212) {
-                        jul=jul+szemelyek;
+                        jul = jul + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 213 && darabolt[3][i] - ejszakaszam <= 243) {
-                        aug=aug+szemelyek;
+                        aug = aug + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 244 && darabolt[3][i] - ejszakaszam <= 273) {
-                        sep=sep+szemelyek;
+                        sep = sep + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 274 && darabolt[3][i] - ejszakaszam <= 304) {
-                        okt=okt+szemelyek;
+                        okt = okt + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 305 && darabolt[3][i] - ejszakaszam <= 334) {
-                        nov=nov+szemelyek;
+                        nov = nov + szemelyek;
                     }
                     if (darabolt[3][i] - ejszakaszam >= 335 && darabolt[3][i] - ejszakaszam <= 365) {
-                        dec=dec+szemelyek;
+                        dec = dec + szemelyek;
                     }
                     ejszakaszam--;
                 }
 
             }
-            System.out.println("1:"+jan);
-            System.out.println("2:"+feb);
-            System.out.println("3:"+mar);
-            System.out.println("4:"+apr);
-            System.out.println("5:"+maj);
-            System.out.println("6:"+jun);
-            System.out.println("7:"+jul);
-            System.out.println("8:"+aug);
-            System.out.println("9:"+sep);
-            System.out.println("10:"+okt);
-            System.out.println("11:"+nov);
-            System.out.println("12:"+dec);
-            
+            System.out.println("1:" + jan);
+            System.out.println("2:" + feb);
+            System.out.println("3:" + mar);
+            System.out.println("4:" + apr);
+            System.out.println("5:" + maj);
+            System.out.println("6:" + jun);
+            System.out.println("7:" + jul);
+            System.out.println("8:" + aug);
+            System.out.println("9:" + sep);
+            System.out.println("10:" + okt);
+            System.out.println("11:" + nov);
+            System.out.println("12:" + dec);
+
             System.out.println("---ÖTÖDIK FELADAT---");
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Kérem adja meg az új foglalás kezdő napjának sorszámát (1-365)!");
+            Integer kezdoNap = sc.nextInt();
+            System.out.println("Kérem adja meg az eltöltendő éjszakák számát!");
+            ejszakaszam = sc.nextInt();
             
+            Integer[] szabad = new Integer[ejszakaszam];
             
+            //feltöltöm 0-val a null helyett
+            for (int i = 0; i < ejszakaszam; i++) {
+                szabad[i]=0;
+            }
             
+            for (int i = 0; i < ejszakaszam; i++) {
+                
+                for (int j = 0; j < 984; j++) {
+                    if (darabolt[2][j] == kezdoNap) {
+                        szabad[i]++;
+                    }
+                }
+                kezdoNap++;
+            }
+            //megnézem hogy melyik a legkisebb
+            Integer legkisebb=27;
+            for (int i = 0; i < ejszakaszam; i++) {
+                if (szabad[i]<legkisebb) {
+                    legkisebb=szabad[i];
+                }
+            }
+            System.out.println("A megadoatt időszak teljes időtartamában "+legkisebb+" db. szoba szabad.");
+
         } catch (FileNotFoundException ex) {
             System.out.println("Hiba a file-nál!");
         } catch (IOException ex) {
