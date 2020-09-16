@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -46,6 +46,7 @@ public class Pitypang {
                 darabolt[5][i]= Integer.parseInt(ideiglenes[5]);
                 nevek[i]= ideiglenes[6];
             }
+            
             System.out.println("---MÁSODIK FELADAT---");
             Integer maxEjszakak=+0;
             Integer sorszam=0;
@@ -56,6 +57,8 @@ public class Pitypang {
                 }
             }
             System.out.println(nevek[sorszam-1]+" ("+darabolt[2][sorszam-1]+") - "+maxEjszakak);
+            
+            System.out.println("---HARMADIK FELADAT---");
             
              
             
